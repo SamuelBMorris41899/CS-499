@@ -1,4 +1,3 @@
-#get sub statments
 keyTokens = {
     "V":"or",
     "N":"and",
@@ -9,45 +8,42 @@ keyTokens = {
     ")":"",
 }
 
-def tokenIsParens(token):
+def __tokenIsParens__(token):
     return (token == "(" or token == ")")
-def buildSubStatments(tokens):
+
+def __buildSubStatments__(tokens):
     subStatments = []
     subStatment = ""
     numSubStatment = 0
 
     for token in tokens:
-
         if(token == "("):
             numSubStatment -= 1 
-        
         if(token == ")"):
             numSubStatment += 1
-        
         if(numSubStatment != 0):
             subStatment += " " + token
-
         if (numSubStatment == 0 and subStatment != ""):
             final = subStatment[3:]
             subStatments.append(final) #remove leading space
             subStatment = ""
     return subStatments
-def getSubStatments(tokens):
-    print("Tokens given")
-    print(tokens)
-    subStatments = buildSubStatments(tokens)
+
+def __getSubStatments__(tokens):
+    
+    subStatments = __buildSubStatments__(tokens)
     
     #recursion to get statments inside of the substatment
     returnValue = []
     for statment in subStatments:
         finalStatment = statment
         statments = statment.split(' ')
-        recursive = getSubStatments(statments)
+        recursive = __getSubStatments__(statments)
         returnValue +=  [finalStatment] + recursive
         
     return returnValue
     
-def connectSubSetandWff(tokens,index,direction):
+def __connectSubSetandWff__(tokens,index,direction):
 
     subStatment = []
     parensCount = 0
@@ -62,18 +58,16 @@ def connectSubSetandWff(tokens,index,direction):
 
     for i in list:
         token = tokens[i]
-        print(token)
         if(token == "("):
             parensCount -= 1
         if(token == ")"):
             parensCount += 1
 
         if(parensCount == 0):
-            print("parensCount " + str(parensCount))
             break
         else:
             subStatment.append(token)
-            print(subStatment)
+            
     
     #readd the parens from the statment
     #since it losses one depending on the direction
@@ -87,16 +81,21 @@ def connectSubSetandWff(tokens,index,direction):
         final += " )"    
     return final
 
-def connectSubSetAndWffBefore(sub,token,post):
+def __connectSubSetAndWffBefore__(sub,token,post):
     return sub + " " + token + " " + post
 
-def connectSubSetAndWffAfter(sub,token,pre):
+def __connectSubSetAndWffAfter__(sub,token,pre):
     return pre + " " + token + " " + sub
-    
 
-def getStatments(input,statmentTokens):
+def sortMethod(e):
+    return len(e)
+def sortStatments(statments):
+    statments.sort(key = sortMethod)
+
+def getStatments(input):
+    statmentTokens = input.split(" ")
     
-    statments = getSubStatments(statmentTokens)
+    statments = __getSubStatments__(statmentTokens)
 
     for pos in range(1,len(statmentTokens)-1):
         
@@ -111,20 +110,20 @@ def getStatments(input,statmentTokens):
         #if the token is a key value such as "and" or "or"
         if(token in keyTokens and (token != "(" and token != ")")):
             #the "and" case e.g q and p
-            if ( not(tokenIsParens(lastToken)) and not(tokenIsParens(nextToken)) and token == "and"):
+            if ( not(__tokenIsParens__(lastToken)) and not(__tokenIsParens__(nextToken)) and token == "and"):
                 newStatment = lastToken + " " + token + " " + nextToken
                 statments.append(newStatment)
 
             if (lastToken == ")"):
 
                 #get the subStatment
-                subStatmentToAdd = connectSubSetandWff(statmentTokens,pos,-1)
-                subStatmentToAdd = connectSubSetAndWffBefore(subStatmentToAdd,token,nextToken)
+                subStatmentToAdd = __connectSubSetandWff__(statmentTokens,pos,-1)
+                subStatmentToAdd = __connectSubSetAndWffBefore__(subStatmentToAdd,token,nextToken)
                 statments.append(subStatmentToAdd)
 
             if (nextToken == "("):
-                subStatmentToAdd = connectSubSetandWff(statmentTokens,pos,1)
-                subStatmentToAdd = connectSubSetAndWffAfter(subStatmentToAdd,token,lastToken)
+                subStatmentToAdd = __connectSubSetandWff__(statmentTokens,pos,1)
+                subStatmentToAdd = __connectSubSetAndWffAfter__(subStatmentToAdd,token,lastToken)
                 statments.append(subStatmentToAdd)
     returnValue = [] 
     for statment in statments:
@@ -134,6 +133,4 @@ def getStatments(input,statmentTokens):
 
 inputString = "( ( a or c ) and d ) or p and q"
 
-# inputString = "q and p or ( a or c )"
-
-print(getStatments(inputString,inputString.split(" ")))
+print(getStatments(inputString))
