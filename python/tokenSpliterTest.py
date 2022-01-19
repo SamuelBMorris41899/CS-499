@@ -6,7 +6,5 @@ inputString = "p or q or ( a and c ) -> q'"
 
 inputString = "( p or q ) or ( a and c ) -> q'"
 inputString = "a and ( p and ( a or c ) and ( c or d ) )"
-ans = getStatments(inputString)
-print(ans)
-print(ans)
-print(ttg.Truths(["a", "b"], ["a and b"]))
+# ans = getStatments(inputString)
+# print(ans)
