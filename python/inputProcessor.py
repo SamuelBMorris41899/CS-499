@@ -196,8 +196,8 @@ def getStatementAndAddToStatementKeys(string,context):
 
 def dealWithStatements(statement):
     s = []
-    # dealWith_keyToken_A(statement, "not")
-    s = getStatementAndAddToStatementKeys(statement, ["and", "nand"])
+    # s += dealWith_keyToken_A(statement, "not") Not needed due to substatement
+    s += getStatementAndAddToStatementKeys(statement, ["and", "nand"])
     s += getStatementAndAddToStatementKeys(statement, ["or", "xor"])
     s += dealWithConditionals(statement,["=>","="])
     return s
@@ -241,4 +241,5 @@ def getAllStatements(iString):
     variables.sort()
     allStatements.sort()
     allStatements.sort(key=len)
+
     return (variables,list(set(allStatements)))

@@ -8,7 +8,7 @@ def generateTruthTable(statement):
 
 # table,blah = generateTruthTable("b or a and ( p and ( a or c ) and ( c or d ) ) or e")
 # table,blah = generateTruthTable("( a and b ) nand c xor ( not ( d or c ) )")
-table,blah = generateTruthTable("( b => c ) => ( c and d or b )")
+table,blah = generateTruthTable("( b => c ) => ( ( not c ) and d or b )")
 print(blah,"\n",table)
 '''
 TODO:
