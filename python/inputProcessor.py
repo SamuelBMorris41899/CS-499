@@ -1,12 +1,3 @@
-'''
-TIME:
-3.5 hours (guess since not measured given I am a fool)
-6:30 PM - 7:22 PM
-7:30 PM - 7:50 PM
-8:15 PM - 8:22 PM
-5:55 pm - 
-'''
-
 keyTokens = {
     "or": "or",
     "and": "and",
@@ -235,11 +226,12 @@ def getAllStatements(iString):
 
 
     allStatements += subStatements
-    allStatements = list(set(allStatements))
     allStatements += dealWithStatements(iString)
+
+    allStatements = list(set(allStatements))
 
     variables.sort()
     allStatements.sort()
     allStatements.sort(key=len)
 
-    return (variables,list(set(allStatements)))
+    return (variables,allStatements)
