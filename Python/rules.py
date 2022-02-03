@@ -18,3 +18,17 @@ complex_rules = {
     "P and Q":"P, Q",                                           #Simplification
     "A => B , B => C": "A => C"                                 #Hypothetical Syllogism- HS
 }
+
+
+keyTokens = {
+    "or": "or",
+    "and": "and",
+    "(": "(",
+    ")": ")",
+    "not":"not",
+    "nor":"nor",
+    "nand":"nand",
+    "xor":"xor",
+    "=>":"=>",
+    "=":"="
+}

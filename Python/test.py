@@ -14,5 +14,5 @@ class test:
 #practice   9,11,12,13
 #HW         9-42
 
-test("( not A ) or ( not B ) or C or D and Q" , " ( A and B ) => C").runTest() #want steps     1. hyp. 2.  1,DeMorgan  3. 2,imp
+test("P or P" , "P or P").runTest()
 

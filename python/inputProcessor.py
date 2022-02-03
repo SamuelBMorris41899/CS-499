@@ -1,20 +1,8 @@
-keyTokens = {
-    "or": "or",
-    "and": "and",
-    "(": "(",
-    ")": ")",
-    "not":"not",
-    "nor":"nor",
-    "nand":"nand",
-    "xor":"xor",
-    "=>":"=>",
-    "=":"="
-}
+import Token
+from rules import keyTokens
+token = Token.Token()
 
-keyTokensOrder = [["not"],["and","nand"],["or","xor","nor"],["=>","="]]
-
-
-def addVariablesToTable(tokens):
+def addAtomsToTable(tokens):
     vars = []
     for token in tokens:
         if token not in keyTokens and token not in vars and token != "":
@@ -55,6 +43,7 @@ def findAllSubStatments(tokens):
     subStatement, startIndex, endIndex = findSubStatment(tokens)
     subStatementList = []
     if endIndex > startIndex:
+        # get any subStatement inside pf the already found substatement
         subStatementList = findAllSubStatments(tokens[startIndex + 1:endIndex])
 
     if subStatement != "" and subStatement not in subStatementList:
@@ -70,39 +59,11 @@ def findAllSubStatments(tokens):
     return subStatementList
 
 
-statementKeys = {
-
-}
-
-def addToStatementKeys(list):
-    kList = []
-    for item in list:
-        if item not in statementKeys.values():
-            k = "S" + str(len(statementKeys.values()) + 1)
-            kList.append(k)
-            statementKeys[k] = item
-
-def translateKeysToStatement(statement):
-    for key in statementKeys.keys():
-        if key in statement:
-            statement = statement.replace(key, "( " + statementKeys[key] + " )")
-    return statement
 
 
-def translateStatementToKeys(statement):
-    returnVal = statement
-
-    for key,value in statementKeys.items():
-        if value in statement:
-            returnVal = statement.replace(value,key)
-            returnVal = returnVal.replace("( " + key + " )",key) #in case there are ()
-
-    if returnVal != statement:
-        returnVal = translateStatementToKeys(returnVal)
-    return returnVal
 
 def dealWith_keyToken_A(string, context):
-    string = translateStatementToKeys(string)
+    string = token.translate_statement_to_keys(string)
     print(string)
 
     return []
@@ -152,17 +113,6 @@ def dealWith_A_keyToken_B(tokens, context):
     return returnValue
 
 
-def dealWithConditionals(string,context): ###############################################################
-    context = context[0]
-    print("inCOnditionals", string)
-    return []
-    string = translateStatementToKeys(string)
-
-    if context in string:
-        addToStatementKeys(string)
-        return dealWithConditionals(string,context) + [string]
-    return []
-
 
 def listToText(list):
     text = ""
@@ -170,56 +120,52 @@ def listToText(list):
         text += " " + item
     return text[1:]
 
+
 def getStatementAndAddToStatementKeys(string,context):
     statements = []
-    translated = translateStatementToKeys(string)
+    translated = token.translate_statement_to_keys(string)
     ands = dealWith_A_keyToken_B(translated.split(" "), context)
     for statement in ands:
-        statement = translateKeysToStatement(statement)
+        statement = token.translate_keys_to_statement(statement)
         statements.append(statement)
-    addToStatementKeys(statements)
+    token.add_multiple_token(statements)
 
     for s in ands:
-        s = translateKeysToStatement(s)
+        s = token.translate_keys_to_statement(s)
         statements.append(s)
 
-    return  statements
+    return statements
+
 
 def dealWithStatements(statement):
     s = []
     # s += dealWith_keyToken_A(statement, "not") Not needed due to substatement
     s += getStatementAndAddToStatementKeys(statement, ["and", "nand"])
     s += getStatementAndAddToStatementKeys(statement, ["or", "xor"])
-    s += dealWithConditionals(statement,["=>","="])
     return s
+
+
 def getAllStatements(iString):
+    global token
     if iString == "":
         return [],[]
-    statementKeys.clear()
+    token = Token.Token()
     allStatements = [iString]
-
     inputTokens = iString.split(" ")
-
-    variables = addVariablesToTable(inputTokens)
-
+    variables = addAtomsToTable(inputTokens)
     subStatements = findAllSubStatments(inputTokens)
-    addToStatementKeys(subStatements)
-    #deal with ands in subStatments
-
-
-
-    
+    token.add_multiple_token(subStatements)
     for statement in subStatements:
         count = 0
-        for key,value in statementKeys.items():
+        for key,value in token.get_dict().items():
             if value in statement:
                 count += 1
 
         if count > 1: #there is at least one subStatement in the statement
-            for key,value in statementKeys.items():
+            for key,value in token.get_dict().items():
                 if value in statement:
                     newStatement = statement.replace("( " + value + " )",key)
-                    if newStatement not in statementKeys.keys():
+                    if newStatement not in token.get_keys():
                         statement = newStatement
             allStatements += dealWithStatements(statement)
 

@@ -7,7 +7,6 @@ class Token:
         self.tokens = {}
 
     def add_token(this,new_token):
-        print("adding token")
         key = "statement_" + str(len(this.tokens))
         this.tokens[key] = new_token
 
@@ -34,7 +33,7 @@ class Token:
     def translate_keys_to_statement(self,statement):
         for key in self.tokens.keys():
             if key in statement:
-                statement = statement.replace(key, "( " + statementKeys[key] + " )")
+                statement = statement.replace(key, "( " + self.tokens[key] + " )")
 
         return statement
 
