@@ -1,7 +1,13 @@
-from parser import parse
+from parser import parser
+
+parse = parser()
 proven = []
 subs = []
+
+premise = []
+
+
 def simplifySubStatment(statement):
-    vars, stats = parse(statement)
-    print(vars)
-    print(stats)
+    hyps = parse.get_Hypotheses_Simple(statement)
+    print(hyps)
+
