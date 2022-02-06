@@ -33,9 +33,15 @@ class Token:
     def translate_keys_to_statement(self,statement):
         for key in self.tokens.keys():
             if key in statement:
-                statement = statement.replace(key, "( " + self.tokens[key] + " )")
+                replaceWith = "( " + self.tokens[key] + " )"
 
-        return statement
+                newStatement = statement.replace(key, replaceWith).strip()
+
+                if newStatement == replaceWith:
+                    statement = statement.replace(key, self.tokens[key])
+                else:
+                    statement = newStatement
+        return statement.strip()
 
     def translate_statement_to_keys(self,statement):
         return_value = statement

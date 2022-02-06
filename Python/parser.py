@@ -3,8 +3,10 @@ from Token import Token
 class parser:
     key_tokens = ["or","and","(",")","not","nor","nand","xor","=>","="]
 
-    hyps = Token()
 
+    def __init__(self):
+        self.hyps = Token()
+        self.subStatments = Token()
 
     def get_high_level_substatements(this,statement):
         sub_statements = []
@@ -40,7 +42,7 @@ class parser:
             if key in removed_key_tokens:
                 removed_key_tokens = removed_key_tokens.replace(key,"")
         removed_key_tokens = removed_key_tokens.replace(" ", "")
-        print(removed_key_tokens)
+
         variables = list(set([i for i in removed_key_tokens]))
 
         return variables
@@ -65,7 +67,6 @@ class parser:
                     lowestIndex = index
 
         if (index == -1):
-            print("negative index")
             return []
 
         index = lowestIndex
@@ -81,20 +82,35 @@ class parser:
         returnValue += tokenToAdd
         return returnValue
 
+    def deductionMethod(self,statement):
+        if "=>" in statement:
+            end = statement.find("=>")
+            lookAt = statement.strip()
+            sub_parse = parser()
+            return sub_parse.get_Hypotheses(lookAt)
+        return []
 
-    def get_Hypotheses_Simple(this,statement):
-        subs = this.get_high_level_substatements(statement)
-        this.hyps.add_multiple_token(subs)          #add high level subStatments
-        print(statement.split(" "))
-        ORS = this.dealWith_A_keyToken_B(statement.split(" "),["OR","XOR"])
+    def get_Hypotheses(self, statement):
+        subs = self.get_high_level_substatements(statement)
+        self.subStatments.add_multiple_token(subs)
 
-        this.hyps.add_multiple_token(ORS)
+        translate = self.subStatments.translate_statement_to_keys(statement)
+        get_from = ""
+        add=[]
+        if "=>" in translate:
+            get_from = translate.split("=>")[0]
 
-        lone_variable = this.get_atoms(statement)
-        this.hyps.add_multiple_token(lone_variable)  # add high level subStatments
+            for key in get_from.split(" "):
+                if key in self.subStatments.get_keys():
+                    self.hyps.add_token(self.subStatments.get_token(key))
 
-        print(this.hyps.print_values())
+            get_to = translate.split("=>")[1]
+            get_to = self.subStatments.translate_keys_to_statement(get_to)
+            add = self.deductionMethod(get_to)
+        else:
+            get_from = translate
 
-        # print(subs)
 
-        return list(this.hyps.get_values())
+
+        a = get_from.split("and")
+        return [self.hyps.translate_keys_to_statement(i) for i in a] + add
