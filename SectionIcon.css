@@ -1,0 +1,13 @@
+.sectionIcon_Img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.sectionIcon_Img:hover {
+    opacity: 0.5;
+}
+
+.sectionIcon_Name {
+    padding: 0px;
+}
