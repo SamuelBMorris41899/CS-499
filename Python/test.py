@@ -8,7 +8,7 @@ class test_hypothesis:
 
     def runTest(self):
         #runFunction for Test
-        logic = PLogic()
+        logic = PLogic("Not needed for this test")
         hyps = logic.get_hypotheses(self.problem)
         difference = [i for i in self.expected if i not in hyps] + [i for i in hyps if i not in self.expected]
 
@@ -40,12 +40,18 @@ test_hypothesis("hyp_hw_18","( A => ( B => C ) ) and ( A or not D ) and B => ( D
 test_hypothesis("hyp_hw_19","( not A => not B ) and B and ( A => C ) => C" , ["not A => not B","B","A => C"]).runTest()
 
 class test_prover:
-    def __init__(self,name,statement):
+    def __init__(self,name,statement,target):
         self.name = name
         self.statement = statement
+        self.tar = target
 
     def runTest(self):
-        logic = PLogic()
+        print("TEST CLASS TARGET IS",self.tar)
+        logic = PLogic(self.tar)
         solved = logic.solve(self.statement)
+        if solved:
+            print("{} passed".format(self.name))
+        else:
+            print("{} failed".format(self.name))
 
-test_prover("NEW_TEST","A and ( B => C ) => ( B => ( A and C ) )").runTest() #final B is deduction method???
+test_prover("NEW_TEST","A and ( B => C ) => ( B => ( A and C ) )","A and C").runTest() #final B is deduction method???

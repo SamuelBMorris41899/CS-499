@@ -16,11 +16,13 @@ TO DO:
 
 from parser import parser
 class PLogic:
-    def __init__(self):
+    def __init__(self,target):
         self.parse = parser()
         self.proven = []
         self.subs = []
         self.premise = []
+        self.target = target
+
         self.steps = {}
         self.stepCount = 1
 
@@ -34,6 +36,15 @@ class PLogic:
         key = "{}".format(self.stepCount)
         self.steps[key] = [statement,step]
         self.stepCount += 1
+    '''
+    Gets the hypotheses and adds them to the steps list
+    '''
+    def get_hypotheses(self,statement):
+        hyps = self.parse.get_Hypotheses(statement)
+        for h in hyps:
+            self.add_step(h,"hyp")
+        self.proven = [h for h in hyps]
+        return hyps
 
     '''
     looks for any statments that look like  S1 => S2, if S1 is proven, then S2 is proven
@@ -46,25 +57,44 @@ class PLogic:
                 part1 = self.parse.subStatments.translate_keys_to_statement(sList[0])
                 part2 = sList[1].strip()
                 if part1 in self.proven:
-                    self.proven.append(part2)
-                    self.add_step(part2,"moden ponens")
+                    if part2 not in self.proven:
+                        self.proven.append(part2)
+                        self.add_step(part2,"moden ponens")
 
         return
-
     '''
-    Gets the hypotheses and adds them to the steps list
+    A helper function for conn
     '''
-    def get_hypotheses(self,statement):
-        hyps = self.parse.get_Hypotheses(statement)
-        for h in hyps:
-            self.add_step(h,"hyp")
-        self.proven = [h for h in hyps]
-        return hyps
+    def hasEquivilent(self,list,s1,s2,token):
+        for statement in list:
+            t = "{} {} {}".format(s2, token, s1)
+            if t in list:
+                return True
+        return False
 
+    def conjunction(self):
+        newStatements = []
+        for statementA in self.proven:
+            for statementB in self.proven:
+                if statementA != statementB:
+                    newStatement = "{} and {}".format(statementA,statementB)
+                    if newStatement not in self.proven and self.hasEquivilent(newStatements,statementA,statementB,"and") == False:
+                        newStatements.append(newStatement)
+        for s in newStatements:
+            self.add_step(s, "con")
+            self.proven.append(s)
 
     def solve(self,statements):
         self.get_hypotheses(statements)
-        self.moden_ponens(self.proven)
-        self.pretty_print_steps()
+        while self.target not in self.proven:
+            self.moden_ponens(self.proven)
+            self.conjunction()
 
+            self.pretty_print_steps()
+            print("TARGET",self.target)
+            if self.target in self.proven:
+                print("TARGET FOUND!!!")
+                return True
+        return False
 
+ 
