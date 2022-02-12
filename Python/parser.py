@@ -1,16 +1,19 @@
 from Token import Token
+import re
 
 class parser:
     key_tokens = ["or","and","(",")","not","nor","nand","xor","=>","="]
 
+    def __init__(self,statement):
+        self.statement=statement
+        self.hyps = Token()#move to prop logic
 
-    def __init__(self):
-        self.hyps = Token()
         self.subStatments = Token()
+        subs = self.get_sub_statements(statement)
+        self.subStatments.add_multiple_token(subs)
 
-    def get_high_level_substatements(this,statement):
+    def get_sub_statements(this, statement):
         sub_statements = []
-
         sub_statement = ""
         parens = 0
         for char_position in range(len(statement)):
@@ -30,20 +33,21 @@ class parser:
                 sub_statement = ""
 
 
+        for sub in sub_statements:
+            if "(" in sub and ")" in sub:
+                sub_statements += this.get_sub_statements(sub)
+
         return sub_statements
 
     def get_atoms(self, statement):
-        statement = self.hyps.translate_statement_to_keys(statement)
-        removed_key_tokens = statement
-        for key_token in self.key_tokens:
-            if key_token in removed_key_tokens:
-                removed_key_tokens = removed_key_tokens.replace(key_token,"")
-        for key in self.hyps.get_keys():
-            if key in removed_key_tokens:
-                removed_key_tokens = removed_key_tokens.replace(key,"")
-        removed_key_tokens = removed_key_tokens.replace(" ", "")
-
-        variables = list(set([i for i in removed_key_tokens]))
+        statement = self.subStatments.translate_statement_to_keys(statement)
+        variables = re.split('and',statement)
+        # variables = statement.split("and")
+        variables = list(set(variables))
+        for pos in range(len(variables)):
+            v = variables[pos]
+            v = self.subStatments.translate_keys_to_statement(v)
+            variables[pos] = v
 
         return variables
 
@@ -82,24 +86,37 @@ class parser:
         returnValue += tokenToAdd
         return returnValue
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    '''
+    move to prop logic
+    '''
     def deductionMethod(self,statement):
         if "=>" in statement:
             end = statement.find("=>")
             lookAt = statement.strip()
-            sub_parse = parser()
-            return sub_parse.get_Hypotheses(lookAt)
+            sub_parse = parser(lookAt)
+            return sub_parse.get_hypotheses()
         return []
 
-    def get_Hypotheses(self, statement):
-        subs = self.get_high_level_substatements(statement)
-        self.subStatments.add_multiple_token(subs)
-
-        translate = self.subStatments.translate_statement_to_keys(statement)
+    def get_hypotheses(self):
+        translate = self.subStatments.translate_statement_to_keys(self.statement)
         get_from = ""
         add=[]
         if "=>" in translate:
             get_from = translate.split("=>")[0]
-
+            atoms = self.get_atoms(get_from)  # hypos!, in their most basic form
             for key in get_from.split(" "):
                 if key in self.subStatments.get_keys():
                     self.hyps.add_token(self.subStatments.get_token(key))
@@ -110,7 +127,5 @@ class parser:
         else:
             get_from = translate
 
-
-
-        a = get_from.split("and")
-        return [self.hyps.translate_keys_to_statement(i) for i in a] + add
+        retValue = [i for i in atoms] + add
+        return retValue

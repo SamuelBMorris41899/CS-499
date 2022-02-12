@@ -45,8 +45,8 @@
       <recent name="C:\Users\samue\OneDrive\Desktop\CS-499\python\" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Test 3.1">
-    <configuration name="Test 3.1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.Test 1.2">
+    <configuration name="Test 1.2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CS-499" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -135,17 +135,17 @@
       <method v="2" />
     </configuration>
     <configuration name="tableGenerator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="CS-499" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Sam\Desktop\CS-499\venv\Scripts\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\samue\OneDrive\Desktop\CS-499\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/tableGenerator.py" />
       <option name="PARAMETERS" value="" />
@@ -161,11 +161,11 @@
       <item itemvalue="Python.recursion" />
       <item itemvalue="Python.recursionTest" />
       <item itemvalue="Python.tableGenerator" />
-      <item itemvalue="Python.Test 3.1" />
+      <item itemvalue="Python.Test 1.2" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Test 3.1" />
+        <item itemvalue="Python.Test 1.2" />
         <item itemvalue="Python.tableGenerator" />
         <item itemvalue="Python.recursionTest" />
         <item itemvalue="Python.recursion" />
@@ -191,18 +191,57 @@
       <workItem from="1643131108172" duration="2542000" />
       <workItem from="1643216571789" duration="9586000" />
       <workItem from="1643853994791" duration="1204000" />
-      <workItem from="1643908585259" duration="19150000" />
+      <workItem from="1643908585259" duration="43275000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Python/PropLogic.py</url>
+          <line>148</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Python/PropLogic.py</url>
+          <line>174</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Python/PropLogic.py</url>
+          <line>118</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CS_499$tableGenerator.coverage" NAME="tableGenerator Coverage Results" MODIFIED="1643849127310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
+    <SUITE FILE_PATH="coverage/CS_499$tableGenerator.coverage" NAME="tableGenerator Coverage Results" MODIFIED="1644515126355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
     <SUITE FILE_PATH="coverage/CS_499$tableGenerator__1_.coverage" NAME="Test 1.1 Coverage Results" MODIFIED="1643848122687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
     <SUITE FILE_PATH="coverage/CS_499$recursion.coverage" NAME="recursion Coverage Results" MODIFIED="1643215414111" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python/temp" />
-    <SUITE FILE_PATH="coverage/CS_499$Test_3_1.coverage" NAME="Test 3.1 Coverage Results" MODIFIED="1644336021586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
+    <SUITE FILE_PATH="coverage/CS_499$Test_3_1.coverage" NAME="Test 1.2 Coverage Results" MODIFIED="1644518057155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
     <SUITE FILE_PATH="coverage/CS_499$inputProcessor.coverage" NAME="inputProcessor Coverage Results" MODIFIED="1642617410784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
     <SUITE FILE_PATH="coverage/CS_499$tokenSpliterTest.coverage" NAME="tokenSpliterTest Coverage Results" MODIFIED="1642616540642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
     <SUITE FILE_PATH="coverage/CS_499$tokenSplitter.coverage" NAME="tokenSplitter Coverage Results" MODIFIED="1642537754817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />

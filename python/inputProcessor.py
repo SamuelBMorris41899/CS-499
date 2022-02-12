@@ -1,5 +1,6 @@
 import Token
 from rules import keyTokens
+from parser import parser
 token = Token.Token()
 
 def addAtomsToTable(tokens):
@@ -35,6 +36,7 @@ def findSubStatment(tokens):
             break
 
     return subStatment[2:len(subStatment)].strip(), start, end
+    # return subStatment[len(subStatment)].strip(" ()"), start, end
 
 def findAllSubStatments(tokens):
     if len(tokens) == 0:
@@ -58,24 +60,6 @@ def findAllSubStatments(tokens):
 
     return subStatementList
 
-
-
-
-
-def dealWith_keyToken_A(string, context):
-    string = token.translate_statement_to_keys(string)
-    print(string)
-
-    return []
-    tokens = string.split(" ")
-    print(tokens)
-    if context not in tokens:
-        return []
-    index = tokens.index(context)
-    nextToken = tokens.pop(index + 1)
-    tokens[index] = context + " " + nextToken
-    tokens = dealWith_keyToken_A(tokens, context)
-    return tokens
 
 def dealWith_A_keyToken_B(tokens, context):
 
@@ -139,7 +123,6 @@ def getStatementAndAddToStatementKeys(string,context):
 
 def dealWithStatements(statement):
     s = []
-    # s += dealWith_keyToken_A(statement, "not") Not needed due to substatement
     s += getStatementAndAddToStatementKeys(statement, ["and", "nand"])
     s += getStatementAndAddToStatementKeys(statement, ["or", "xor"])
     return s
@@ -148,7 +131,7 @@ def dealWithStatements(statement):
 def getAllStatements(iString):
     global token
     if iString == "":
-        return [],[]
+        return [], []
     token = Token.Token()
     allStatements = [iString]
     inputTokens = iString.split(" ")
@@ -180,4 +163,4 @@ def getAllStatements(iString):
     allStatements.sort()
     allStatements.sort(key=len)
 
-    return (variables,allStatements)
+    return variables, allStatements

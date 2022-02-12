@@ -7,8 +7,14 @@ class Token:
         self.tokens = {}
 
     def add_token(this,new_token):
-        key = "statement_" + str(len(this.tokens))
-        this.tokens[key] = new_token
+        if new_token not in this.tokens.values():
+            key = "S-" + str(len(this.tokens))
+            this.tokens[key] = new_token
+        for key,value in this.tokens.items():
+            value = this.translate_statement_to_keys(value)
+            this.tokens[key] = value
+
+
 
     def add_multiple_token(this,new_token_list):
         for token in new_token_list:
@@ -45,12 +51,21 @@ class Token:
 
     def translate_statement_to_keys(self,statement):
         return_value = statement
-
+        last_return_value = statement
         for key, value in self.tokens.items():
+
             if value in statement:
                 return_value = statement.replace(value, key)
                 return_value = return_value.replace("( " + key + " )", key)  # in case there are ()
 
+            #if this is converted into a simple key revert it...
+            if return_value in self.tokens.keys():
+                return_value = last_return_value
+
+            last_return_value = return_value
+
         if return_value != statement:
             return_value = self.translate_statement_to_keys(return_value)
+
+
         return return_value
