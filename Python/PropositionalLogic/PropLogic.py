@@ -15,7 +15,7 @@ TO DO:
 '''
 
 from parser import parser
-from Token import Token
+
 
 def listToString(l):
     retVal = ""
@@ -177,8 +177,8 @@ class PLogic:
                 break
 
             # print("after MT")
-            # self.pretty_print_steps()
-            # print("\n\n\n")
+            self.pretty_print_steps()
+            print("\n\n\n")
         # print("TARGET",self.target)
         if self.target in self.proven:
             # self.parse.subStatments.print_values()

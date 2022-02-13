@@ -1,4 +1,5 @@
-from Token import Token
+from TokenList import TokenList
+from Python.PropLogicAttampt2.Token import Token
 import re
 
 class parser:
@@ -6,36 +7,38 @@ class parser:
 
     def __init__(self,statement):
         self.statement=statement
-        self.hyps = Token()#move to prop logic
+        self.hyps = TokenList()#move to prop logic
 
-        self.subStatments = Token()
+        self.subStatments = TokenList()
         subs = self.get_sub_statements(statement)
         self.subStatments.add_multiple_token(subs)
 
     def get_sub_statements(this, statement):
         sub_statements = []
-        sub_statement = ""
+        sub_statement = Token()
         parens = 0
         for char_position in range(len(statement)):
             char = statement[char_position]
-            if char == "(":
-                parens += 1
-            elif char == ")":
+
+            if char == ")":
                 parens -= 1
 
             if parens != 0:
-                sub_statement += char
+                sub_statement = sub_statement.add(char)
 
-            if sub_statement != "" and parens == 0:
-                sub_statement = sub_statement[1:]
-                sub_statement = sub_statement.strip()
+            if char == "(":
+                parens += 1
+
+
+
+            if sub_statement.value != "" and parens == 0:
                 sub_statements.append(sub_statement)
-                sub_statement = ""
-
+                sub_statement = Token()
 
         for sub in sub_statements:
+            sub = sub.value
             if "(" in sub and ")" in sub:
-                sub_statements += this.get_sub_statements(sub)
+                sub_statements += this.get_sub_statements(sub.strip("()"))
 
         return sub_statements
 
@@ -85,17 +88,6 @@ class parser:
         tokenToAdd = self.dealWith_A_keyToken_B(tokens, context)
         returnValue += tokenToAdd
         return returnValue
-
-
-
-
-
-
-
-
-
-
-
 
 
 

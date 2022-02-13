@@ -1,4 +1,4 @@
-class Token:
+class TokenList:
     tokens = {
 
     }
@@ -7,9 +7,11 @@ class Token:
         self.tokens = {}
 
     def add_token(this,new_token):
-        if new_token not in this.tokens.values():
-            key = "S-" + str(len(this.tokens))
-            this.tokens[key] = new_token
+        for tokenValue in this.tokens.values():
+            if not tokenValue.is_equivilent(new_token):
+                key = "S-" + str(len(this.tokens))
+                this.tokens[key] = new_token
+
         for key,value in this.tokens.items():
             value = this.translate_statement_to_keys(value)
             this.tokens[key] = value

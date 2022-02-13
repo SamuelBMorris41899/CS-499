@@ -1,3 +1,16 @@
+open_brackets = [
+    "(",
+    "[",
+    "{"
+]
+close_brackets = [
+    ")",
+    "]",
+    "}"
+]
+brackets = open_brackets + close_brackets
+
+
 
 simple_rules = {
     "P and Q":"Q and P",                                        #COMMUNATIVE and

@@ -1,7 +1,6 @@
-import Token
 from rules import keyTokens
-from parser import parser
-token = Token.Token()
+
+token = Token.TokenList()
 
 def addAtomsToTable(tokens):
     vars = []
@@ -132,7 +131,7 @@ def getAllStatements(iString):
     global token
     if iString == "":
         return [], []
-    token = Token.Token()
+    token = Token.TokenList()
     allStatements = [iString]
     inputTokens = iString.split(" ")
     variables = addAtomsToTable(inputTokens)
