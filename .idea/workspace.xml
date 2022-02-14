@@ -206,7 +206,7 @@
       <workItem from="1643216571789" duration="9586000" />
       <workItem from="1643853994791" duration="1204000" />
       <workItem from="1643908585259" duration="43275000" />
-      <workItem from="1644767130142" duration="14572000" />
+      <workItem from="1644767130142" duration="17513000" />
     </task>
     <servers />
   </component>
@@ -254,6 +254,6 @@
     <SUITE FILE_PATH="coverage/CS_499$tokenSplitter.coverage" NAME="tokenSplitter Coverage Results" MODIFIED="1642537754817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python" />
     <SUITE FILE_PATH="coverage/CS_499$test.coverage" NAME="test Coverage Results" MODIFIED="1643834170386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python/1.2" />
     <SUITE FILE_PATH="coverage/CS_499$tableGenerator__1_.coverage" NAME="Test 1.1 Coverage Results" MODIFIED="1643848122687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
-    <SUITE FILE_PATH="coverage/CS_499$Test_1_2.coverage" NAME="Test 1.2 Coverage Results" MODIFIED="1644781241627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python/PropositionalLogic" />
+    <SUITE FILE_PATH="coverage/CS_499$Test_1_2.coverage" NAME="Test 1.2 Coverage Results" MODIFIED="1644868532880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python/PropositionalLogic" />
   </component>
 </project>

@@ -10,6 +10,18 @@ close_brackets = [
 ]
 brackets = open_brackets + close_brackets
 
+def has_XXX_brackets(statement,bracket_list):
+    for bracket in bracket_list:
+        if bracket in statement:
+            return True
+    return False
+
+def has_open_brackets(statement):
+    return has_XXX_brackets(statement,open_brackets)
+
+def has_closed_brackets(statement):
+    return has_XXX_brackets(statement,close_brackets)
+
 
 
 simple_rules = {
