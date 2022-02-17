@@ -31,16 +31,16 @@ class TokenList:
         expects a string input
     '''
     def translate_keys_to_statement(self,statement):
+        has_changes = False
         for key in self.tokens.keys():
             if key in statement:
+                has_changes = True
                 replaceWith = self.tokens[key]
+                statement = statement.replace(key, replaceWith).strip()
 
-                newStatement = statement.replace(key, replaceWith).strip()
+        if has_changes:
+            statement = self.translate_keys_to_statement(statement)
 
-                if newStatement == replaceWith:
-                    statement = statement.replace(key, self.tokens[key])
-                else:
-                    statement = newStatement
         return statement.strip()
 
     def translate_statement_to_keys(self,statement,translate_down_to_single_statement = False):

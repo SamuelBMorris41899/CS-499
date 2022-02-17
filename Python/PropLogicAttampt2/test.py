@@ -34,7 +34,6 @@ class TestHypothesis:
 #Examples   11-17
 #practice   9,11,12,13
 #HW         9-42
-#
 
 TestHypothesis("hyp_hw_09","A and ( B => C ) => ( B => ( A and C ) )" , ["A","( B => C )","B"]).runTest()
 TestHypothesis("hyp_hw_10","B and ( ( B and C ) => A' ) and ( B => C ) => A'" , ["B","( ( B and C ) => A' )","( B => C )"]).runTest()
@@ -49,30 +48,27 @@ TestHypothesis("hyp_hw_18","( A => ( B => C ) ) and ( A or D' ) and B => ( D => 
 TestHypothesis("hyp_hw_19","( A' => B' ) and B and ( A => C ) => C" , ["( A' => B' )","B","( A => C )"]).runTest()
 
 class test_prover:
-    def __init__(self,name,statement,target,print_steps = False):
+    def __init__(self,name,statement,target,print_steps = False,debug = True):
         self.name = name
         self.statement = statement
         self.tar = target
         self.print_steps = print_steps
+        self.debug = debug
 
     def runTest(self):
         parser = Parse(self.statement)
         table = parser.sub_statements
         hyps = HypothesisFinder(self.statement, table).find()
-        logic = PropositionalLogic(statement = self.statement,hypothesis=hyps,target=self.tar)
+        logic = PropositionalLogic(statement = self.statement,hypothesis=hyps,target=self.tar,allow_print = self.debug)
         res = logic.solve()
         if res:
             print("PASSED!")
 
 tests_for_prover = [
-    test_prover(name = "hw9",target="( A and C )",statement="A and ( B => C ) => ( B => ( A and C ) )",print_steps=False),
-
-
-    # test_prover(name = "hw10",target="A'",statement="B and ( ( B and C ) => A' ) and ( B => C ) => A'"),
-
+    test_prover(name = "hw9", target="( A and C )", statement="A and ( B => C ) => ( B => ( A and C ) )", debug=False),
+    test_prover(name = "hw10", target="A'", statement="B and ( ( B and C ) => A' ) and ( B => C ) => A'", debug=False),
+    test_prover(name = "hw14", target="B'", statement="A' and ( B => A ) => B'", debug=False),
     # test_prover(name = "hw15",target="C",statement="( A => B ) and ( A => ( B => C ) ) => ( A => C )"),
-    # test_prover(name="hw14", target="not ( B )", statement="not ( A ) and ( B => A ) => not B"),
-
     # test_prover(name="hw19", target="C", statement="( not ( A ) => not ( B ) ) and B and ( A => C ) => C",
     #             print_steps=True),
 
