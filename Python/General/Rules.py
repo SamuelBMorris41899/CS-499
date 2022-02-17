@@ -36,6 +36,7 @@ simple_rules = {
     "P <=> Q":"( P => Q ) and ( Q => P )",                      #Def of Equivilence
     "P":"P or Q",                                               #Addition
 }
+
 complex_rules = {
     "P , P => Q": "Q",                                          #Moden Ponens
     "not Q , P => Q": "not P" ,                                 #Moden Tolens
